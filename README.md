@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://github.com/nagaozen/casbin-mssql-adapter/blob/master/logomark.png?raw=true" alt="@nagaozen/casbin-mssql-adapter logomark" width="512" />
-</p>
-
 [![Rollup](https://img.shields.io/badge/built_with-rollup-EC4A3F.svg?style=for-the-badge&logo=rollup)](https://rollupjs.org/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-f7df1e.svg?style=for-the-badge&logo=standardjs)](https://standardjs.com)
 [![Node.js Test Runner](https://img.shields.io/badge/test_by-node-c21325.svg?style=for-the-badge&logo=nodedotjs)](https://nodejs.org/api/test.html)
@@ -10,6 +6,10 @@
 [![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-f05032.svg?style=for-the-badge&logo=git)](http://commitizen.github.io/cz-cli/)
 [![Semantic Release](https://img.shields.io/badge/semantic-release-cb3837.svg?style=for-the-badge&logo=semantic-release)](https://semantic-release.gitbook.io/semantic-release/)
 [![Code Coverage](https://img.shields.io/badge/observability_with-coverage-3F5767.svg?style=for-the-badge&logo=coveralls)](https://coveralls.io/)
+
+<p align="center">
+  <img src="https://github.com/nagaozen/casbin-mssql-adapter/blob/master/logomark.png?raw=true" alt="@nagaozen/casbin-mssql-adapter logomark" width="480" />
+</p>
 
 # About
 
@@ -66,10 +66,10 @@ const schema = 'dbo'
 const table = 'policies'
 const adapter = await CasbinMssqlAdapter.newAdapter(config, { table, schema })
 
-const rbac = await newEnforcer('model.conf', adapter)
+const e = await newEnforcer('model.conf', adapter)
 
 // check the permission.
-rbac.enforce('group', 'resource', 'read')
+e.enforce('group', 'resource', 'read')
 
 // modify the policy.
 // await e.addPolicy(...)
@@ -134,5 +134,5 @@ See [`LICENSE.md`](/LICENSE.md) for more information.
 # Useful links
 * [README logos](https://stock.adobe.com/br/contributor/208853516/hasan?load_type=author) -- logos repository with the same pattern we are using.
 * [Simple Icons](https://simpleicons.org/) -- `shields.io` badges icons and colors.
-* [JSDoc Reference](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html) for great DX without enforcing a transpilation.
-* [OWASP Application Security Tools](https://owasp.org/www-community/Free_for_Open_Source_Application_Security_Tools)
+* [Casbin](https://casbin.org/) -- An authorization library that supports access control models like ACL, RBAC, ABAC for many languages
+* [mssql](https://www.npmjs.com/package/mssql) -- Microsoft SQL Server client for Node.js

@@ -16,10 +16,7 @@ jobs:
         ports:
           - 1433:1433
         options: >-
-          --health-cmd "curl --silent --fail http://localhost:1433 || exit 1" 
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 5
+          --health-cmd "exit 0" --health-interval 10s --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +38,7 @@ jobs:
         name: Install dependencies
 
       - name: wait for MSSQL to be ready
-        run: sleep 30
+        run: sleep 60
 
       - run: pnpm test
         name: Execute tests

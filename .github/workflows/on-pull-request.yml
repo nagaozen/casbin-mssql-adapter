@@ -1,10 +1,26 @@
 name: Continuous integration
 on:
   pull_request:
+  push:
     branches: [master]
 jobs:
   test_pull_request:
     runs-on: ubuntu-latest
+
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: "Y"
+          SA_PASSWORD: "G1thub4ction!"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "curl --silent --fail http://localhost:1433 || exit 1" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
         name: Checkout
@@ -24,8 +40,13 @@ jobs:
       - run: pnpm install
         name: Install dependencies
 
+      - name: wait for MSSQL to be ready
+        run: sleep 30
+
       - run: pnpm test
         name: Execute tests
+        env:
+          MSSQL_CONNECTION_STRING: "Server=localhost,1433;Database=master;User Id=sa;Password=G1thub4ction!;Encrypt=False;TrustServerCertificate=True;"
 
       - run: pnpm run build --if-present
 

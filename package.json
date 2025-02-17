@@ -1,0 +1,50 @@
+{
+  "name": "casbin-mssql-adapter",
+  "version": "1.0.0",
+  "description": "Node.js Casbin Adapter for Microsoft SQL Server",
+  "main": "adapter.mjs",
+  "scripts": {
+    "test": "node --test -r dotenv/config adapter.test.mjs",
+    "prepare": "husky",
+    "commit": "cz",
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nagaozen/casbin-mssql-adapter.git"
+  },
+  "keywords": [
+    "mssql",
+    "casbin",
+    "adapter"
+  ],
+  "author": "Fabio Zendhi Nagao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nagaozen/casbin-mssql-adapter/issues"
+  },
+  "homepage": "https://github.com/nagaozen/casbin-mssql-adapter#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "casbin": "^5.38.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^9.1.7",
+    "standard-version": "^9.5.0"
+  },
+  "dependencies": {
+    "mssql": "^11.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

@@ -5,6 +5,18 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: "Y"
+          SA_PASSWORD: "G1thub4ction!"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "exit 0" --health-interval 10s --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
         name: Checkout
@@ -22,13 +34,16 @@ jobs:
           cache: "pnpm"
           registry-url: https://registry.npmjs.org/
 
-      - run: pnpm install
+      - run: pnpm install --no-frozen-lockfile
         name: Install dependencies
 
-      - run: pnpm test
-        name: Execute tests
+      - run: sleep 60
+        name: wait for MSSQL to be ready
 
       - run: pnpm run build --if-present
+        name: Build npm package
+        env:
+          MSSQL_CONNECTION_STRING: "Server=localhost,1433;Database=master;User Id=sa;Password=G1thub4ction!;Encrypt=False;TrustServerCertificate=True;"
 
       - run: pnpm publish --access public --no-git-checks
         name: Publish Module

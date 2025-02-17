@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=report.lcov -r dotenv/config src/adapter.test.mjs",
+    "prebuild": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=report.lcov src/adapter.test.mjs",
     "build": "rollup -c",
     "pretest": "standard --verbose | snazzy",
     "test": "node --test -r dotenv/config src/adapter.test.mjs",

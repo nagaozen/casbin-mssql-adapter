@@ -1,5 +1,5 @@
 {
-  "name": "casbin-mssql-adapter",
+  "name": "@nagaozen/casbin-mssql-adapter",
   "version": "1.0.0",
   "description": "Node.js Casbin Adapter for Microsoft SQL Server",
   "main": "./dist/index.cjs.js",

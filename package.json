@@ -2,9 +2,22 @@
   "name": "casbin-mssql-adapter",
   "version": "1.0.0",
   "description": "Node.js Casbin Adapter for Microsoft SQL Server",
-  "main": "adapter.mjs",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "node --test -r dotenv/config adapter.test.mjs",
+    "prebuild": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=report.lcov -r dotenv/config src/adapter.test.mjs",
+    "build": "rollup -c",
+    "pretest": "standard --verbose | snazzy",
+    "test": "node --test -r dotenv/config src/adapter.test.mjs",
     "prepare": "husky",
     "commit": "cz",
     "release": "standard-version"
@@ -19,7 +32,7 @@
     "adapter"
   ],
   "author": "Fabio Zendhi Nagao",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/nagaozen/casbin-mssql-adapter/issues"
   },
@@ -27,19 +40,18 @@
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
-    "casbin": "^5.38.0",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.4.7",
-    "eslint": "^8.0.1",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
     "husky": "^9.1.7",
+    "snazzy": "^9.0.0",
+    "standard": "^17.1.2",
     "standard-version": "^9.5.0"
   },
   "dependencies": {
+    "casbin": "^5.38.0",
     "mssql": "^11.0.1"
   },
   "config": {

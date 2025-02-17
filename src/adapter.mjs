@@ -9,7 +9,7 @@ class CasbinMssqlAdapter {
   static #isInternalConstructing = false
 
   static async newAdapter (config, options = { table: 'casbin_rule' }) {
-    CasbinMssqlAdapter.#isInternalConstructing = true;
+    CasbinMssqlAdapter.#isInternalConstructing = true
     const adapter = new CasbinMssqlAdapter(config, options)
     adapter.db = await adapter.pool.connect()
     await adapter._createTableIfNotExists()
@@ -18,8 +18,7 @@ class CasbinMssqlAdapter {
 
   // IMPORTANT: constructors MUST be public and sync
   constructor (config, options) {
-    if (!CasbinMssqlAdapter.#isInternalConstructing)
-      throw new SyntaxError('NOT_CONSTRUCTABLE')
+    if (!CasbinMssqlAdapter.#isInternalConstructing) { throw new SyntaxError('NOT_CONSTRUCTABLE') }
 
     this.pool = options.pool ?? new mssql.ConnectionPool(config)
     this.table = options.table ?? 'casbin_rule'
@@ -153,7 +152,7 @@ UPDATE t SET
 FROM ${this.identifier} t
   INNER JOIN cte ON t.id = cte.id
 `
-    const r = await this.db.request()
+    await this.db.request()
       .input('prev_ptype', mssql.VarChar(255), prev.ptype)
       .input('prev_v0', mssql.VarChar(255), prev.v0)
       .input('prev_v1', mssql.VarChar(255), prev.v1)
@@ -194,7 +193,7 @@ FROM ${this.identifier} t
   }
 
   async removePolicies (sec, ptype, rules) {
-    for (let rule of rules) {
+    for (const rule of rules) {
       await this.removePolicy(sec, ptype, rule)
     }
   }
@@ -243,7 +242,7 @@ FROM ${this.identifier} t
       v2: rule[2] ?? null,
       v3: rule[3] ?? null,
       v4: rule[4] ?? null,
-      v5: rule[5] ?? null,
+      v5: rule[5] ?? null
     }
   }
 

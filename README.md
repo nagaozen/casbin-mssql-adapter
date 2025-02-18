@@ -13,7 +13,7 @@
 
 # About
 
-`@nagaozen/casbin-mssql-adapter` is a lightweight, high-quality adapter for Casbin, specifically designed for Microsoft SQL Server. Casbin already provides a powerful authorization abstraction with support for multiple adapters. In many cases, adding another layer of abstraction (such as an ORM) can be over-engineering—introducing unnecessary complexity and potential performance issues.
+`@nagaozen/casbin-mssql-adapter` is a lightweight, high-quality adapter for Casbin, specifically designed for Microsoft SQL Server. Casbin already provides a powerful authorization abstraction with support for multiple adapters. In many cases, adding another layer of abstraction (such as an ORM) can be over-engineering introducing unnecessary complexity and potential performance issues.
 
 By focusing solely on MSSQL, this adapter delivers:
 
@@ -37,13 +37,13 @@ This adapter is fully open source and aims to provide a robust, production-ready
 
 By default, each adapter creates its own table in the database. While this might seem convenient, it poses a significant drawback when multiple adapters need to share the same database: policies cannot be shared across adapters if they are stored in separate tables.
 
-## Why Customization is important
+This adapter promotes customization. Some of benefits of this approach:
 
 **Compliance with Naming Conventions:**
-Many production databases follow strict naming conventions. By customizing the table name, you can ensure that your adapter’s tables comply with these conventions, which is essential for production environments.
+Many production databases follow strict naming conventions. By customizing the table name and schema, you can ensure that your adapter’s tables comply with these conventions and security constraints, which is essential for production environments.
 
 **Shared Policies:**
-When the same set of policies should be accessible by different adapters or services, having them in separate tables prevents a unified view. Customizing the table name allows you to consolidate policies into a single table that can be shared across adapters.
+When the same set of policies should be accessible by different adapters or services, having them in separate tables prevents a unified view. Allowing a single table to consolidate policies is key for sharing rules between adapters.
 
 **Avoiding Duplication:**
 If each adapter creates its own table by default, it can lead to unnecessary duplication of data. This not only wastes storage space but can also lead to inconsistent policy enforcement across different parts of your application.
@@ -120,16 +120,6 @@ As soon as the maintainers are satisfied with the feature set to be released, th
 1. Run `npm run release`.
 1. Confirm if the package is available in npm as the latest version.
 1. Notify the maintainers of project embedding this library for faster adoption.
-
-# License
-
-This project is licensed under the Looplex Limited Public License. Feel free to edit and distribute this template as you like.
-
-See [`LICENSE.md`](/LICENSE.md) for more information.
-
-# Acknowledgments
-* Special thanks to CEO Angelo Caldeira for enabling this initiative and to our CTO [Fabio Nagao](https://github.com/nagaozen/) who created the framework of this library.
-* Shoutout to [looplex contributors](https://github.com/orgs/looplex/people) for their outstanding effort on releasing open source software.
 
 # Useful links
 * [README logos](https://stock.adobe.com/br/contributor/208853516/hasan?load_type=author) -- logos repository with the same pattern we are using.
